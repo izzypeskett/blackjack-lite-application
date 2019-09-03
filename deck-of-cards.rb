@@ -49,7 +49,6 @@ class Deck
   end
  
   def deal
-    puts "players card:"
     @cards.shift.deal_card
   end
 end
