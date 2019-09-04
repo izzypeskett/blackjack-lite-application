@@ -24,142 +24,142 @@ class Player < Dealer
     end
     
 
-        def player_profile 
-            begin
-            puts "Howdy! What's your player name?"
-            @name = gets.strip
-                if @name.length > 10
-                    raise 
-                end
-            rescue => error
-                    puts "Sorry name length is too long. Please restrict to 10 characters or less"
-                    player_profile
+    def player_profile 
+        begin
+        puts "Howdy! What's your player name?"
+        @name = gets.strip
+            if @name.length > 10
+                raise 
             end
-            start
+        rescue => error
+                puts "Sorry name length is too long. Please restrict to 10 characters or less"
+                player_profile
         end
+        start
+    end
 
-        def start
-            puts "Howdy #{@name}"
-            puts "#{@name}s bank: $#{@bank}"
-            answer = PROMPT.select("What's your move?", %w(Deal Exit)) 
-             if answer == "Deal"
-                @instancecount += 1
-                system "clear"
-                starting_bet
-             else answer == "Exit"
-                p @outcomes
-             end
-        end
-
-        def starting_bet
-            puts "#{@name}s bank: $#{@bank}"
-            player_bet = PROMPT.select("Place a bet", %w(10 100 200 500))
-            @player_bet = player_bet.to_i
-            if @player_bet > @bank
-                puts "Insufficient funds: place a smaller bet"
-                starting_bet
-            end
+    def start
+        puts "Howdy #{@name}"
+        puts "#{@name}s bank: $#{@bank}"
+        answer = PROMPT.select("What's your move?", %w(Deal Exit)) 
+            if answer == "Deal"
+            @instancecount += 1
             system "clear"
-            the_deal
-            
+            starting_bet
+            else answer == "Exit"
+            p @outcomes
+            end
+    end
 
+    def starting_bet
+        puts "#{@name}s bank: $#{@bank}"
+        player_bet = PROMPT.select("Place a bet", %w(10 100 200 500))
+        @player_bet = player_bet.to_i
+        if @player_bet > @bank
+            puts "Insufficient funds: place a smaller bet"
+            starting_bet
         end
-
-        def the_deal
-            puts "Players hand:"
-            puts " ------------ "
-            card1 = @deck.deal
-            card2 = @deck.deal
-            puts " ------------ "
-            if card1 == 11
-                ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
-                if ace_option == '1'
-                    card1 = 1
-                else ace_option == '11'
-                    card1 = 11
-                end
-            else
-            end
-            if card2 == 11
-                ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
-                if ace_option == '1'
-                    card2 = 1
-                else ace_option == '11'
-                    card2 = 11
-                end
-            else
-            end
-            @hand << card1
-            @hand << card2
-            @playerhand = card1 + card2
-            puts "Player Total = #{@playerhand}"
-            player_hand
-        end 
-
-        def the_deal_two
-            puts "Next card:"
-            puts " ------------ "
-            rank3 = @deck.deal
-            puts " ------------ "
-            if rank3 == 11
-                ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
-                if ace_option == '1'
-                    rank3 = 1
-                else ace_option == '11'
-                    rank3 = 11
-                end
-            else
-            end
-            @hand.push(rank3)
-            @playerhand += rank3
-            puts "Player Total = #{@playerhand}"
-            player_hand
-        end
+        system "clear"
+        the_deal
         
-        def player_hand
-            if @playerhand == 21 && @hand.length == 2
-                blackjack
-            elsif @playerhand > 21
-                puts FONT.write("Bust!")
-                outcome
-            else @playerhand < 21
-                player_move = PROMPT.select("What's your move?", %w(Hit Stand))
-                if player_move == "Hit"
-                    the_deal_two
-                else player_move == "Stand"
-                    dealer_hand
-                end
+
+    end
+
+    def the_deal
+        puts "Players hand:"
+        puts " ------------ "
+        card1 = @deck.deal
+        card2 = @deck.deal
+        puts " ------------ "
+        if card1 == 11
+            ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
+            if ace_option == '1'
+                card1 = 1
+            else ace_option == '11'
+                card1 = 11
+            end
+        else
+        end
+        if card2 == 11
+            ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
+            if ace_option == '1'
+                card2 = 1
+            else ace_option == '11'
+                card2 = 11
+            end
+        else
+        end
+        @hand << card1
+        @hand << card2
+        @playerhand = card1 + card2
+        puts "Player Total = #{@playerhand}"
+        player_hand
+    end 
+
+    def the_deal_two
+        puts "Next card:"
+        puts " ------------ "
+        rank3 = @deck.deal
+        puts " ------------ "
+        if rank3 == 11
+            ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
+            if ace_option == '1'
+                rank3 = 1
+            else ace_option == '11'
+                rank3 = 11
+            end
+        else
+        end
+        @hand.push(rank3)
+        @playerhand += rank3
+        puts "Player Total = #{@playerhand}"
+        player_hand
+    end
+    
+    def player_hand
+        if @playerhand == 21 && @hand.length == 2
+            blackjack
+        elsif @playerhand > 21
+            puts FONT.write("Bust!")
+            outcome
+        else @playerhand < 21
+            player_move = PROMPT.select("What's your move?", %w(Hit Stand))
+            if player_move == "Hit"
+                the_deal_two
+            else player_move == "Stand"
+                dealer_hand
             end
         end
+    end
 
-        def blackjack
-            puts FONT.write("Blackjack!").blink
-            @bank += @player_bet * 2 
-            p @bank
-            start
-        end
+    def blackjack
+        puts FONT.write("Blackjack!").blink
+        @bank += @player_bet * 2 
+        p @bank
+        history
+    end
 
-        def outcome
-            if  @playerhand < @dealerhand || @playerhand > 21
-                puts "Dealer wins!"
-                @bank -= @player_bet
-            elsif
-                @playerhand > @dealerhand 
-                puts FONT.write("Player wins!").blink
-                @bank += @player_bet * 1.5
-            else @playerhand == @dealerhand
-                puts "Even Steven! No Winner."
-            end
-            history
+    def outcome
+        if  @playerhand < @dealerhand || @playerhand > 21
+            puts "Dealer wins!"
+            @bank -= @player_bet
+        elsif
+            @playerhand > @dealerhand 
+            puts FONT.write("Player wins!").blink
+            @bank += @player_bet * 1.5
+        else @playerhand == @dealerhand
+            puts "Even Steven! No Winner."
         end
+        history
+    end
 
-        def history
-            history = { :round => @instancecount, :bet => @player_bet, :bank => @bank }
-            @outcomes << history
-            PROMPT.keypress("Reshuffling cards. Next round will start in :countdown ...", timeout: 3)
-            @hand = []
-            start
-        end
+    def history
+        history = { :round => @instancecount, :bet => @player_bet, :bank => @bank }
+        @outcomes << history
+        PROMPT.keypress("Reshuffling cards. Next round will start in :countdown ...", timeout: 3)
+        @hand = []
+        start
+    end
 
 end
 
@@ -174,5 +174,3 @@ puts "                                 "
 
 player_01 = Player.new("Izzy")
 player_01.player_profile
-
-
