@@ -22,9 +22,9 @@ class Card
     else @suit == '♣' || @suit == '♠'
       puts "#{@rank}".colorize(:black).on_white + " #{@suit}".colorize(:black).on_white
       if @rank == "K" || @rank == "Q" || @rank == "J"
-        @rank = 10
-      elsif @rank == "A"
-        @rank = 11
+          @rank = 10
+        elsif @rank == "A"
+          @rank = 11
       else
       end
       return @rank
