@@ -20,6 +20,7 @@ class Player < Dealer
         @outcomes = []
         @dealerhand = 0
         @instancecount = 0
+        @hand = []
     end
     
 
@@ -31,7 +32,7 @@ class Player < Dealer
                     raise 
                 end
             rescue => error
-                    puts "Sorry name length is too long. Please restric to 10 characters or less"
+                    puts "Sorry name length is too long. Please restrict to 10 characters or less"
                     player_profile
             end
             start
@@ -70,6 +71,8 @@ class Player < Dealer
             card1 = @deck.deal
             card2 = @deck.deal
             puts " ------------ "
+            @hand << card1
+            @hand << card2
             @playerhand = card1 + card2
             puts "Player Total = #{@playerhand}"
             player_hand
@@ -80,13 +83,14 @@ class Player < Dealer
             puts " ------------ "
             rank3 = @deck.deal
             puts " ------------ "
+            @hand.push(rank3)
             @playerhand += rank3
             puts "Player Total = #{@playerhand}"
             player_hand
         end
         
         def player_hand
-            if @playerhand == 21 
+            if @playerhand == 21 && @hand.length == 2
                 blackjack
             elsif @playerhand > 21
                 puts FONT.write("Bust!")
@@ -127,14 +131,13 @@ class Player < Dealer
         def history
             history = { :round => @instancecount, :bet => @player_bet, :bank => @bank }
             @outcomes << history
+            PROMPT.keypress("Reshuffling cards. Next round will start in :countdown ...", timeout: 3)
+            @hand = []
             start
         end
 
 end
 
-
-# puts PASTEL.yellow(FONT.write('Blackjack lite'))
-# puts "Howdy Partner!"
 
 puts "                                 "
 puts "                                 "
