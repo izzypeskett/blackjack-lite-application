@@ -23,7 +23,6 @@ class Player < Dealer
         @hand = []
     end
     
-
     def player_profile 
         begin
         puts "Howdy! What's your player name?"
