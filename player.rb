@@ -142,12 +142,10 @@ class Player < Dealer
         def outcome
             if  @playerhand < @dealerhand || @playerhand > 21
                 puts "Dealer wins!"
-                p  @dealerhand
-                p  @playerhand
                 @bank -= @player_bet
             elsif
                 @playerhand > @dealerhand 
-                puts Font.write("Player wins!").blink
+                puts FONT.write("Player wins!").blink
                 @bank += @player_bet * 1.5
             else @playerhand == @dealerhand
                 puts "Even Steven! No Winner."

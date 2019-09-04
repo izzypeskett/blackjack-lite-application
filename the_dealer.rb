@@ -32,7 +32,6 @@ class Dealer
                 outcome
             else @dealerhand > 21
                 puts "Dealer bust!"
-                p @dealerhand
                 @bank += @player_bet * 1.5
                 PROMPT.keypress("Reshuffling cards. Next round will start in :countdown ...", timeout: 3)
                 start
