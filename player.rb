@@ -43,11 +43,11 @@ class Player < Dealer
         puts "#{@name}s bank: $#{@bank}"
         answer = PROMPT.select("What's your move?", %w(Deal Exit)) 
             if answer == "Deal"
-            @instancecount += 1
-            system "clear"
-            starting_bet
+                @instancecount += 1
+                system "clear"
+                starting_bet
             else answer == "Exit"
-            p @outcomes
+                p @outcomes
             end
     end
 
@@ -55,14 +55,12 @@ class Player < Dealer
         puts "#{@name}s bank: $#{@bank}"
         player_bet = PROMPT.select("Place a bet", %w(10 100 200 500))
         @player_bet = player_bet.to_i
-        if @player_bet > @bank
-            puts "Insufficient funds: place a smaller bet"
-            starting_bet
-        end
+            if @player_bet > @bank
+                puts "Insufficient funds: place a smaller bet"
+                starting_bet
+            end
         system "clear"
         the_deal
-        
-
     end
 
     def the_deal
@@ -71,24 +69,24 @@ class Player < Dealer
         card1 = @deck.deal
         card2 = @deck.deal
         puts " ------------ "
-        if card1 == 11
-            ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
-            if ace_option == '1'
-                card1 = 1
-            else ace_option == '11'
-                card1 = 11
+            if card1 == 11
+                ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
+                if ace_option == '1'
+                    card1 = 1
+                else ace_option == '11'
+                    card1 = 11
+                end
+            else
             end
-        else
-        end
-        if card2 == 11
-            ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
-            if ace_option == '1'
-                card2 = 1
-            else ace_option == '11'
-                card2 = 11
+            if card2 == 11
+                ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
+                if ace_option == '1'
+                    card2 = 1
+                else ace_option == '11'
+                    card2 = 11
+                end
+            else
             end
-        else
-        end
         @hand << card1
         @hand << card2
         @playerhand = card1 + card2
@@ -101,15 +99,15 @@ class Player < Dealer
         puts " ------------ "
         rank3 = @deck.deal
         puts " ------------ "
-        if rank3 == 11
-            ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
-            if ace_option == '1'
-                rank3 = 1
-            else ace_option == '11'
-                rank3 = 11
+            if rank3 == 11
+                ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
+                if ace_option == '1'
+                    rank3 = 1
+                else ace_option == '11'
+                    rank3 = 11
+                end
+            else
             end
-        else
-        end
         @hand.push(rank3)
         @playerhand += rank3
         puts "Player Total = #{@playerhand}"
