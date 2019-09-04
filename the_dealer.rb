@@ -7,10 +7,20 @@ class Dealer
     def dealer_hand
         puts "Dealers hand:"
         puts " ------------ "
-        rank1 = @deck.deal
-        rank2 = @deck.deal
+        card1 = @deck.deal
+        card2 = @deck.deal
         puts " ------------ "
-        @dealerhand = rank1 + rank2
+        @dealerhand = card1 + card2
+        if card1 == 11 && @dealerhand > 10 && @dealerhand != 21
+            card1 = 1
+            @dealerhand = card1 + card2
+        else
+        end
+        if card2 == 11 && @dealerhand > 10 && @dealerhand != 21
+            card2 = 1
+            @dealerhand = card1 + card2
+        else
+        end
         puts "Dealers total = #{@dealerhand}"
         dealer_play
         end
