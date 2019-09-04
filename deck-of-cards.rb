@@ -37,19 +37,19 @@ class Deck
   def initialize
     @ranks = [*(2..10), 'J', 'Q', 'K', 'A']
     @suits = ['♣', '♥', '♠', '♦']
-    @cards = []
+    @new_deck = []
  
     @ranks.each do |rank|
       @suits.each do |suit|
-        @cards << Card.new(rank, suit)
+        @new_deck << Card.new(rank, suit)
       end
     end
   
-  @cards.shuffle!
+  @new_deck.shuffle!
   end
  
   def deal
-    @cards.shift.deal_card
+    @new_deck.shift.deal_card
   end
 end
  
