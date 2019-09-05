@@ -45,12 +45,9 @@ class Deck
   end
 
   def deal
-    begin
+  
     @new_deck.shift.deal_card
-    rescue => error
-
-      
-    end
+  
   end
 end
 
