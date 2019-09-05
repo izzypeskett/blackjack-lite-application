@@ -4,6 +4,7 @@ require "tty-prompt"
 require "tty-font"
 require "artii"
 require "rainbow"
+require "colorize"
 
 PROMPT = TTY::Prompt.new
 FONT = TTY::Font.new(:standard)
@@ -11,8 +12,8 @@ PASTEL = Pastel.new
 ARTII = Artii::Base.new :font => 'small'
 
 class Player < Dealer
-    def initialize(name)
-        @name = name
+    def initialize
+        @name = " "
         @bank = 1000
         @deck = Deck.new
         @playerhand = 0 
@@ -24,7 +25,7 @@ class Player < Dealer
     end
 
     def show_hint
-        if @playerhand > 16
+        if @playerhand > 16 && @playerhand < 21
             puts "Hank thinks y'all should Stand!".colorize(:yellow).bold
         else @playerhand < 16
             puts "Hank thinks y'all should Hit!".colorize(:yellow).bold
@@ -63,6 +64,10 @@ class Player < Dealer
     end
 
     def start
+        if @deck == nil
+            puts "ERROR"
+            @deck = Deck.new
+        end
         puts "Howdy #{@name}"
         begin
         puts "#{@name}s bank: $#{@bank}"
@@ -124,9 +129,18 @@ class Player < Dealer
             end
         @hand << card1
         @hand << card2
+        begin
         @playerhand = card1 + card2
+            if card1 == nil || card2 == nil
+                raise
+            end
+        rescue => error
+            puts "END OF DECK: RESHUFFLING!"
+            @deck = Deck.new
+            start
+        end
         puts "Player Total = #{@playerhand}"
-        if ARGV.length > 0
+        if ARGV.length > 0 
             show_hint
         end
         player_hand
@@ -147,9 +161,18 @@ class Player < Dealer
             else
             end
         @hand.push(rank3)
+        begin
         @playerhand += rank3
+            if rank3 == nil
+                raise
+            end
+        rescue => error
+            puts "END OF DECK: RESHUFFLING!"
+            @deck = Deck.new
+            start
+        end
         puts "Player Total = #{@playerhand}"
-        if ARGV.length > 0
+        if ARGV.length > 0 && @playerhand < 21
             show_hint
         end
         player_hand
@@ -222,5 +245,5 @@ puts '♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦ ♣ ♥ �
 puts "                                 "
 puts "                                 "
 
-player_01 = Player.new("Izzy")
+player_01 = Player.new
 player_01.player_profile

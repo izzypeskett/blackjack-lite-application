@@ -31,7 +31,7 @@ end
 
 # this class is to create a 52 card deck by itterating through the ranks array and pairing with each suit
 # It shuffles the deck and pulls a card from the deck
-class Deck
+class Deck 
   def initialize
     @ranks = [*(2..10), 'J', 'Q', 'K', 'A']
     @suits = ['♣', '♥', '♠', '♦']
@@ -45,7 +45,12 @@ class Deck
   end
 
   def deal
+    begin
     @new_deck.shift.deal_card
+    rescue => error
+
+      
+    end
   end
 end
 
