@@ -40,3 +40,5 @@ Blackjack Lite can be implemented and accessed via the users' smartphone, whilst
 
 Currently, the application has only been designed to run through the terminal. The ruby code will be run through the terminal where the user will interact with Blackjack Lite. 
 
+
+

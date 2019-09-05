@@ -50,4 +50,5 @@ I have solved both my previous issues
 I implemented the use of ARGV. 
 Initially had major issues with this. When getting the user to run the ruby file with an argument it picked up the player name to be longer than 10 characters and the code got caught in my begin and rescue. 
 Adding ```` STDIN ```` in front of the ````gets.strip```` solved this error. Unsure of why this solved it, will need to do further research to comprehend the error. 
+
 I finished the manual testing of my code with only 1 minor error. Through this, I realised completing the manual testing earlier in my code creation would have been more useful. 
