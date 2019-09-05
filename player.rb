@@ -22,24 +22,62 @@ class Player < Dealer
         @instancecount = 0
         @hand = []
     end
+
+    def show_hint
+        if @playerhand > 16
+            puts "Hank thinks y'all should Stand!"
+        else @playerhand < 16
+            puts "Hank thinks y'all should Hit!"
+        end
+        player_hand
+    end
     
     def player_profile 
         begin
         puts "Howdy! What's your player name?"
-        @name = gets.strip
+        @name = STDIN.gets.strip
             if @name.length > 10
                 raise 
             end
-        rescue => error
+        rescue StandardError => se
+            puts se.backtrace
                 puts "Sorry name length is too long. Please restrict to 10 characters or less"
-                player_profile
+                # player_profile
+        end
+        # if ARGV[0] == '--hint' 
+        if ARGV.length > 0
+            system "clear"
+            puts "Howdy partner! Hank's my name and blackjack's my game"
+            puts "Throughout the game I'll be here to give ya some red hot hints!"
+            puts "And remember to gamble responsibly!"
+            puts "YEE-HAW!".colorize(:yellow)
+
         end
         start
+
     end
+    
+    # def hank 
+    #     if ARGV.length > 0
+    #         puts "Howdy partner! Hank's my name and blackjack's my game"
+    #         puts "Throughout the game I'll be here to give ya some red hot hints!"
+    #         puts "And remember to gamble responsibly! Yee-Haw!"
+    # end
 
     def start
         puts "Howdy #{@name}"
+        begin
         puts "#{@name}s bank: $#{@bank}"
+            if @bank < 10
+                raise
+            end
+        rescue => error
+            puts "uh-oh! Looks like your bank account is less than $10"
+            puts "Remember to gamble responsibly!"
+            puts PROMPT.keypress("Bank account will reset in :countdown ...", timeout: 60)
+            @bank = 1000
+        end
+            
         answer = PROMPT.select("What's your move?", %w(Deal Exit)) 
             if answer == "Deal"
                 @instancecount += 1
@@ -90,6 +128,9 @@ class Player < Dealer
         @hand << card2
         @playerhand = card1 + card2
         puts "Player Total = #{@playerhand}"
+        if ARGV.length > 0
+            show_hint
+        end
         player_hand
     end 
 

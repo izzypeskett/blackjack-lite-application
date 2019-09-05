@@ -14,7 +14,7 @@ class Dealer
         @dealerhand = card1 + card2
             if card1 == 11 && @dealerhand > 10 && @dealerhand != 21
                 card1 = 1
-                @dealerhand = card1 + card2
+                @dealerhand = card1 + card2 
             else
             end
             if card2 == 11 && @dealerhand > 10 && @dealerhand != 21
