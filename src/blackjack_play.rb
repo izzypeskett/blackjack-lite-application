@@ -22,16 +22,11 @@ class Player < Dealer
         @dealerhand = 0
         @instancecount = 0
         @hand = []
+        @card1 = 0
+        @card2 = 0
     end
 
-    def show_hint
-        if @playerhand > 16 && @playerhand < 21
-            puts "Hank thinks y'all should Stand!".colorize(:yellow).bold
-        else @playerhand < 16
-            puts "Hank thinks y'all should Hit!".colorize(:yellow).bold
-        end
-        player_hand
-    end
+    
     
     def player_profile 
         begin
@@ -53,15 +48,7 @@ class Player < Dealer
 
 
     
-    def hank 
-        system "clear"
-        puts "Howdy partner!".colorize(:yellow).underline
-        puts "Hank's my name and blackjack's my game"
-        puts "Throughout the game I'll be here to give ya some red hot hints!"
-        puts "And remember to gamble responsibly!"
-        puts "YEE-HAW!".colorize(:yellow)
-        start
-    end
+   
 
     def start
         if @deck == nil
@@ -106,32 +93,38 @@ class Player < Dealer
     def the_deal
         puts "Players hand:".underline
         puts " ------------ "
-        card1 = @deck.deal
-        card2 = @deck.deal
+        @card1 = @deck.deal
+        @card2 = @deck.deal
         puts " ------------ "
-            if card1 == 11
-                ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
-                if ace_option == '1'
-                    card1 = 1
-                else ace_option == '11'
-                    card1 = 11
-                end
+            if @card1 == 11
+                ace_value_one
+                # ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
+                # if ace_option == '1'
+                #     card1 = 1
+                # else ace_option == '11'
+                #     card1 = 11
+                # end
+            elsif @card2 == 11
+                ace_value_two
+            #     ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
+            #     if ace_option == '1'
+            #         card2 = 1
+            #     else ace_option == '11'
+            #         card2 = 11
+            #     end
+            # else
+            # end
             else
+                next_move
             end
-            if card2 == 11
-                ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
-                if ace_option == '1'
-                    card2 = 1
-                else ace_option == '11'
-                    card2 = 11
-                end
-            else
-            end
-        @hand << card1
-        @hand << card2
+    end
+
+    def next_move
+        @hand << @card1
+        @hand << @card2
         begin
-        @playerhand = card1 + card2
-            if card1 == nil || card2 == nil
+        @playerhand = @card1 + @card2
+            if @card1 == nil || @card2 == nil
                 raise
             end
         rescue => error
@@ -145,6 +138,29 @@ class Player < Dealer
         end
         player_hand
     end 
+
+    def ace_value_one
+        ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
+        case ace_option
+        when '1' 
+            @card1 = 1
+        else '11' 
+            @card1 = 11
+        end
+        next_move
+    end
+
+    def ace_value_two
+        ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
+        case ace_option
+        when '1' 
+            @card2 = 1
+        else '11' 
+            @card2 = 11
+        end
+        next_move
+    end
+
 
     def the_deal_two
         puts "Next card:"
@@ -232,6 +248,25 @@ class Player < Dealer
         PROMPT.keypress("Reshuffling cards. Next round will start in :countdown ...", timeout: 3)
         @hand = []
         start
+    end
+
+    def hank 
+        system "clear"
+        puts "Howdy partner!".colorize(:yellow).underline
+        puts "Hank's my name and blackjack's my game"
+        puts "Throughout the game I'll be here to give ya some red hot hints!"
+        puts "And remember to gamble responsibly!"
+        puts "YEE-HAW!".colorize(:yellow)
+        start
+    end
+
+    def show_hint
+        if @playerhand > 16 && @playerhand < 21
+            puts "Hank thinks y'all should Stand!".colorize(:yellow).bold
+        else @playerhand < 16
+            puts "Hank thinks y'all should Hit!".colorize(:yellow).bold
+        end
+        player_hand
     end
 
 end
