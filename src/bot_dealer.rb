@@ -8,7 +8,7 @@ class Dealer
     end
   
   def dealer_hand
-    puts 'Dealers hand:'
+    puts 'Dealers hand:'.colorize(:blue).underline
     puts ' ------------ '
     @card1 = @deck.deal
     @card2 = @deck.deal

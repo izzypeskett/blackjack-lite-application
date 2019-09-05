@@ -25,9 +25,9 @@ class Player < Dealer
 
     def show_hint
         if @playerhand > 16
-            puts "Hank thinks y'all should Stand!"
+            puts "Hank thinks y'all should Stand!".colorize(:yellow).bold
         else @playerhand < 16
-            puts "Hank thinks y'all should Hit!"
+            puts "Hank thinks y'all should Hit!".colorize(:yellow).bold
         end
         player_hand
     end
@@ -45,23 +45,22 @@ class Player < Dealer
         end
         # if ARGV[0] == '--hint' 
         if ARGV.length > 0
-            system "clear"
-            puts "Howdy partner! Hank's my name and blackjack's my game"
-            puts "Throughout the game I'll be here to give ya some red hot hints!"
-            puts "And remember to gamble responsibly!"
-            puts "YEE-HAW!".colorize(:yellow)
-
+            hank
         end
         start
-
     end
+
+
     
-    # def hank 
-    #     if ARGV.length > 0
-    #         puts "Howdy partner! Hank's my name and blackjack's my game"
-    #         puts "Throughout the game I'll be here to give ya some red hot hints!"
-    #         puts "And remember to gamble responsibly! Yee-Haw!"
-    # end
+    def hank 
+        system "clear"
+        puts "Howdy partner!".colorize(:yellow).underline
+        puts "Hank's my name and blackjack's my game"
+        puts "Throughout the game I'll be here to give ya some red hot hints!"
+        puts "And remember to gamble responsibly!"
+        puts "YEE-HAW!".colorize(:yellow)
+        start
+    end
 
     def start
         puts "Howdy #{@name}"
@@ -100,7 +99,7 @@ class Player < Dealer
     end
 
     def the_deal
-        puts "Players hand:"
+        puts "Players hand:".underline
         puts " ------------ "
         card1 = @deck.deal
         card2 = @deck.deal
@@ -150,6 +149,9 @@ class Player < Dealer
         @hand.push(rank3)
         @playerhand += rank3
         puts "Player Total = #{@playerhand}"
+        if ARGV.length > 0
+            show_hint
+        end
         player_hand
     end
     
