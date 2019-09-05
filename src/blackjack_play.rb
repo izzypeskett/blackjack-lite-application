@@ -172,22 +172,33 @@ class Player < Dealer
     end
 
     def blackjack
+        if ARGV.length > 0
+            puts "YEE-HAW! Partner! You as good as me, Hank!".colorize(:yellow)
+        end
         puts FONT.write("Blackjack!").blink
         @bank += @player_bet * 2 
-        p @bank
         history
     end
 
     def outcome
         if  @playerhand < @dealerhand || @playerhand > 21
-            puts "Dealer wins!"
+            if ARGV.length > 0
+                puts "Oh-no partner! You barkin' at a knot!".colorize(:yellow)
+            end
+            puts FONT.write("Dealer wins!")
             @bank -= @player_bet
         elsif
             @playerhand > @dealerhand 
-            puts FONT.write("Player wins!").blink
+            if ARGV.length > 0
+                puts "Yee-Haw partner! We havin' a hog-killin time!".colorize(:yellow)
+            end
+            puts FONT.write("Player wins!")
             @bank += @player_bet * 1.5
         else @playerhand == @dealerhand
-            puts "Even Steven! No Winner."
+            if ARGV.length > 0
+                puts "Looks like that hand was between hay and grass!".colorize(:yellow)
+            end
+            puts FONT.write("Draw!")
         end
         history
     end
