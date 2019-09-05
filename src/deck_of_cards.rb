@@ -48,3 +48,4 @@ class Deck
     @new_deck.shift.deal_card
   end
 end
+

@@ -1,26 +1,14 @@
+require_relative 'deck_of_cards'
 
-@name = "Testabelle"
+## Assesing the deck is creating a card and converting to integer 
+## When assesing the return method the data type of the card should return as an integer
+
+deck = Deck.new
+p deck.deal.class
 
 
-case deal
-when answer = PROMPT.select("What's your move?", %w(Deal Exit))
-    answer = "Deal"
-end
+## Assessing the object created is true using the .nil? method 
+## after a deck is created and shuffled and a card is picked, assessment of nil will print false
 
-case bet
-when player_bet = PROMPT.select("Place a bet", %w(10 100 200 500))
-    @player_bet = 100
-end
-
-case hand
-when @playerhand < 16
-    player_move = "Hit"
-when @playerhand > 16
-    player_move = "Stand"
-end
-
-case ace
-when ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
-    ace_option = 11
-end
-
+test_deck = Deck.new
+p test_deck.deal.nil?

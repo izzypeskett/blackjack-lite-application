@@ -40,5 +40,62 @@ Blackjack Lite can be implemented and accessed via the users' smartphone, whilst
 
 Currently, the application has only been designed to run through the terminal. The ruby code will be run through the terminal where the user will interact with Blackjack Lite. 
 
+## Features
+### Creation, shuffle and dealing of a 52-card deck. 
+Created two classes ````Card```` and ````Deck````.
 
+```` class Deck ```` loops through the ranks array and pairs it with an element of the suits array. This is done through iterating through the suits array within the iteration of the ranks array. By use of ````.each```` method 
 
+The newly created deck, which takes the instance methods from the ````class Card```` (via pushing ````Card.new```` into an instance variable - this was needed to be done to expand the scope of the methods),is then shuffled and the first card of the deck is taken (and deleted) using the ````.shift```` method. This ensures that the same card can never appear twice. Using methods from ````class Card```` the card or cards dealt appear as a string in their respective colour of either black or red. 
+
+### A bot dealer the user plays against
+Created a ruby script for the dealer. Created ````class Dealer```` and within the class defined instance methods that acted as the dealers parameters. Used if or else statements to compare the dealers hand (sum of the cards when converted to an integer) with set integers.
+````
+if @dealerhand == 21
+      puts 'You lose!'
+      outcome
+    elsif @dealerhand <= 16
+      dealer_hand_two
+    elsif @dealerhand >= 17 && @dealerhand < 21
+      outcome
+    else @dealerhand > 21
+         puts 'Dealer bust!'
+         @bank += @player_bet * 1.5
+         history
+    end
+````
+
+I called upon methods within methods to continue the loop of the dealers plays. The dealer instance methods only run once the player has selected the "stand" option. 
+
+### User interface
+To increase the user experience of Blackjack Lite the application utilises multiple ruby gems to add colour, fonts, user-friendly prompts and string manipulation methods. 
+Ruby gems installed include
+- colorize
+- rainbow
+- tty-font
+- tty-prompt
+- artii
+
+These gems were specifically chosen to not only improve the user experience of Blackjack Lite but to also reduce user error by using the prompt gem. 
+The gems rainbow, tty-font, tty-prompt, and artii were given constant variables to be able to be used globally. 
+
+## User Experience
+
+I conducted a manual test on my major features to assess error handling; this can be found by clicking [here.](https://docs.google.com/spreadsheets/d/1y_Yw6bj7aOeQmeq-Wxl_UqpRjmESkI5HKRMG7LL7Xhk/edit?usp=sharing) 
+
+## Control Flow Diagram 
+
+Control flow diagram can be viewed [here.](https://drive.google.com/file/d/1fgrfDNvJ-X5Q-3f6wPLpYG7PUDlDEqDE/view?usp=sharing)
+
+### Key for control-flow:
+- Circle = Initiation/Termination of application
+
+- Rectangle = Method or Process
+
+- Parallelagram = Requires user input
+
+- Diamond = Decision
+
+- [   ] = Decision options 
+
+- ----> = Direction of the flow 
