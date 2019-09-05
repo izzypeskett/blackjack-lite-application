@@ -1,3 +1,5 @@
+# Help File
+
 # Blackjack Lite Software Development Plan 
 ## Statement of purpose 
 Blackjack Lite is an interactive digital version of the popular casino game blackjack. This terminal application allows the user to play rounds of blackjack against a programmed or bot dealer. 
@@ -99,3 +101,7 @@ Control flow diagram can be viewed [here.](https://drive.google.com/file/d/1fgrf
 - [   ] = Decision options 
 
 - ----> = Direction of the flow 
+
+# Implementation Plan
+
+# Test Application

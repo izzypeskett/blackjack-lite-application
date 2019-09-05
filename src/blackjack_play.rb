@@ -8,7 +8,7 @@ require "rainbow"
 PROMPT = TTY::Prompt.new
 FONT = TTY::Font.new(:standard)
 PASTEL = Pastel.new
-ARTII = Artii::Base.new :font => 'stop'
+ARTII = Artii::Base.new :font => 'small'
 
 class Player < Dealer
     def initialize(name)
@@ -205,9 +205,9 @@ end
 
 puts "                                 "
 puts "                                 "
-puts ARTII.asciify('---------------------------').colorize(:red).on_white
-puts ARTII.asciify('BLACK JACK   LITE').colorize(:black).on_white 
-puts ARTII.asciify('---------------------------').colorize(:red).on_white
+puts '♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦'.colorize(:red)
+puts ARTII.asciify("   "'BLACK JACK   LITE      ').colorize(:black).on_white
+puts '♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦ ♣ ♥ ♠ ♦'.colorize(:red)
 puts "                                 "
 puts "                                 "
 
