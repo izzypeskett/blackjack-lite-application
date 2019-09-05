@@ -39,10 +39,9 @@ class Player < Dealer
             if @name.length > 10
                 raise 
             end
-        rescue StandardError => se
-            puts se.backtrace
+        rescue => error
                 puts "Sorry name length is too long. Please restrict to 10 characters or less"
-                # player_profile
+                player_profile
         end
         # if ARGV[0] == '--hint' 
         if ARGV.length > 0
