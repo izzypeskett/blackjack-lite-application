@@ -24,6 +24,7 @@ class Player < Dealer
         @hand = []
         @card1 = 0
         @card2 = 0
+        @card3 = 0
     end
 
     
@@ -39,22 +40,13 @@ class Player < Dealer
                 puts "Sorry name length is too long. Please restrict to 10 characters or less"
                 player_profile
         end
-        # if ARGV[0] == '--hint' 
         if ARGV.length > 0
             hank
         end
         start
     end
 
-
-    
-   
-
     def start
-        if @deck == nil
-            puts "ERROR"
-            @deck = Deck.new
-        end
         puts "Howdy #{@name}"
         begin
         puts "#{@name}s bank: $#{@bank}"
@@ -98,28 +90,14 @@ class Player < Dealer
         puts " ------------ "
             if @card1 == 11
                 ace_value_one
-                # ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
-                # if ace_option == '1'
-                #     card1 = 1
-                # else ace_option == '11'
-                #     card1 = 11
-                # end
             elsif @card2 == 11
                 ace_value_two
-            #     ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
-            #     if ace_option == '1'
-            #         card2 = 1
-            #     else ace_option == '11'
-            #         card2 = 11
-            #     end
-            # else
-            # end
             else
-                next_move
+                calculation_of_hand
             end
     end
 
-    def next_move
+    def calculation_of_hand
         @hand << @card1
         @hand << @card2
         begin
@@ -147,7 +125,7 @@ class Player < Dealer
         else '11' 
             @card1 = 11
         end
-        next_move
+        calculation_of_hand
     end
 
     def ace_value_two
@@ -158,28 +136,58 @@ class Player < Dealer
         else '11' 
             @card2 = 11
         end
-        next_move
+        calculation_of_hand
     end
 
+    def ace_value_three
+        ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
+        case ace_option
+        when '1' 
+            @card3 = 1
+        else '11' 
+            @card3 = 11
+        end
+        calculation_of_hand_two
+    end
 
-    def the_deal_two
+    def player_hand
+        if @playerhand == 21 && @hand.length == 2
+            blackjack
+        elsif @playerhand > 21
+            puts FONT.write("Bust!")
+            outcome
+        else @playerhand < 21
+            player_move = PROMPT.select("What's your move?", %w(Hit Stand))
+            if player_move == "Hit"
+                player_hit
+            else player_move == "Stand"
+                dealer_hand
+            end
+        end
+    end
+
+    def player_hit
         puts "Next card:"
         puts " ------------ "
-        rank3 = @deck.deal
+        @card3 = @deck.deal
         puts " ------------ "
-            if rank3 == 11
-                ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
-                if ace_option == '1'
-                    rank3 = 1
-                else ace_option == '11'
-                    rank3 = 11
-                end
-            else
+            if @card3 == 11
+                ace_value_three
+                # ace_option = PROMPT.select("What does your ace equal?", %w(1 11))
+                # if ace_option == '1'
+                #     rank3 = 1
+                # else ace_option == '11'
+                #     rank3 = 11
+                # end
             end
-        @hand.push(rank3)
+        calculation_of_hand_two
+     end
+
+    def calculation_of_hand_two
+        @hand.push(@card3)
         begin
-        @playerhand += rank3
-            if rank3 == nil
+        @playerhand += @card3
+            if @card3 == nil
                 raise
             end
         rescue => error
@@ -192,22 +200,6 @@ class Player < Dealer
             show_hint
         end
         player_hand
-    end
-    
-    def player_hand
-        if @playerhand == 21 && @hand.length == 2
-            blackjack
-        elsif @playerhand > 21
-            puts FONT.write("Bust!")
-            outcome
-        else @playerhand < 21
-            player_move = PROMPT.select("What's your move?", %w(Hit Stand))
-            if player_move == "Hit"
-                the_deal_two
-            else player_move == "Stand"
-                dealer_hand
-            end
-        end
     end
 
     def blackjack
