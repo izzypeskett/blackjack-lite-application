@@ -79,10 +79,17 @@ class Player < Dealer
   end
 
   def the_deal
+    begin
     puts 'Players hand:'.underline
     puts ' ------------ '
     @card1 = @deck.deal
     @card2 = @deck.deal
+    raise if @card1.nil? || @card2.nil?
+    rescue StandardError => e
+        puts 'END OF DECK: RESHUFFLING!'
+        @deck = Deck.new
+        start
+    end
     puts ' ------------ '
     if @card1 == 11
       ace_value_one
@@ -148,7 +155,9 @@ class Player < Dealer
     elsif @playerhand > 21
       puts FONT.write('Bust!')
       outcome
-    else
+    elsif @playerhand == 21
+        outcome
+    else 
       player_move = PROMPT.select("What's your move?", %w[Hit Stand])
       if player_move == 'Hit'
         player_hit

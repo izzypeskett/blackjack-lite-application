@@ -3,6 +3,7 @@ A simple interactive terminal application game of blackjack with Ruby
 
 ## Table of contents
 * [General info](#general-info)
+* [Git Hub](#git-hub)
 * [Technologies](#technologies)
 * [Setup](#setup)
 * [Gameplay](#gameplay)
@@ -11,11 +12,15 @@ A simple interactive terminal application game of blackjack with Ruby
 * [Software development plan](#software-development-plan)
 * [Implementation plan](#implementation-plan)
 * [Test Application](#test-application)
-* [Git Hub](#git-hub)
+
 
 
 ## General info
 This terminal application was created as part of Coder Academy's Fast Track course work.
+
+## Git Hub 
+
+Here is the link to my blackjack-lite [git repository](https://github.com/izzypeskett/blackjack-lite-application) 
 
 ## Technologies
 - Ruby version: 2.5.1
@@ -276,6 +281,3 @@ To solve this error and allow the user to continusouly play I added in code to r
     end
 ````
 
-# Git Hub 
-
-Here is the link to my blackjack-lite [git repository](https://github.com/izzypeskett/blackjack-lite-application) 

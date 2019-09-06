@@ -74,6 +74,9 @@ end
     elsif @dealerhand >= 17 && @dealerhand < 21
       outcome
     else
+        unless ARGV.empty?
+            puts "Yee-Haw partner! We havin' a hog-killin time!".colorize(:yellow)
+          end
       puts FONT.write('Dealer bust!')
       @bank += @player_bet * 1.5
       history
