@@ -52,3 +52,15 @@ Initially had major issues with this. When getting the user to run the ruby file
 Adding ```` STDIN ```` in front of the ````gets.strip```` solved this error. Unsure of why this solved it, will need to do further research to comprehend the error. 
 
 I finished the manual testing of my code with only 1 minor error. Through this, I realised completing the manual testing earlier in my code creation would have been more useful. 
+
+## Status Update #3
+Getting to the final details of my code. 
+
+Major errors I have found and managed to solve
+1. When the deck had shifted through 52 cards, it broke the code. I had to add in nil statements to then initiate a recall of the Deck class. 
+2. I created instance methods for the ace calls; however unless I created a method for each card, the ace values were always assigned 11. 
+
+Areas I need to improve and would like to enhance my code:
+1. How to make my code more DRY; I am currently aware I repeat my code, only because the other methods I have tried have only caused my code to break. If I had more time I would improve this aspect
+2. Adding in the "extra" elements such as the split, 5-card charlie and double-down rules within blackjack. 
+3. Exporting results to a csv file to then recall highscores from other users. 

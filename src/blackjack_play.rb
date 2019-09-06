@@ -62,7 +62,7 @@ class Player < Dealer
       starting_bet
     else
       p @outcomes
-      return
+      exit 
     end
   end
 
@@ -105,7 +105,7 @@ class Player < Dealer
       start
     end
     puts "Player Total = #{@playerhand}"
-    show_hint unless ARGV.empty?
+    show_hint unless ARGV.empty? || @playerhand == 21
     player_hand
   end
 
@@ -159,9 +159,15 @@ class Player < Dealer
   end
 
   def player_hit
+    begin
     puts 'Next card:'
     puts ' ------------ '
     @card3 = @deck.deal
+    rescue StandardError => e
+    puts 'END OF DECK: RESHUFFLING!'
+    @deck = Deck.new
+    start
+    end
     puts ' ------------ '
     ace_value_three if @card3 == 11
     sum_of_hand_two
@@ -184,7 +190,7 @@ class Player < Dealer
 
   def blackjack
     unless ARGV.empty?
-      puts 'YEE-HAW! Partner! You as good as me, Hank!'.colorize(:yellow)
+      puts 'YEE-HAW! Partner! You as good as me!'.colorize(:yellow)
     end
     puts FONT.write('Blackjack!').blink
     @bank += @player_bet * 2

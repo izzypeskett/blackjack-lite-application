@@ -9,10 +9,16 @@ class Dealer
   end
 
   def dealer_hand
+    begin
     puts 'Dealers hand:'.colorize(:blue).underline
     puts ' ------------ '
     @card1 = @deck.deal
     @card2 = @deck.deal
+    rescue StandardError => e
+    puts 'END OF DECK: RESHUFFLING!'
+    @deck = Deck.new
+    start
+    end
     puts ' ------------ '
     sum_dealer_hand
   end
@@ -36,6 +42,7 @@ class Dealer
     puts "Dealers total = #{@dealerhand}"
     dealer_play
    end
+end
 
   def ace_value_card2
     if @card2 == 11 && @dealerhand > 10 && @dealerhand != 21
@@ -47,7 +54,13 @@ class Dealer
   end
 
   def dealer_hit
+    begin
     card = @deck.deal
+    rescue StandardError => e
+    puts 'END OF DECK: RESHUFFLING!'
+    @deck = Deck.new
+    start
+    end
     @dealerhand += card
     puts "Dealers total = #{@dealerhand}"
     dealer_play
@@ -55,14 +68,13 @@ class Dealer
 
   def dealer_play
     if @dealerhand == 21
-      puts 'You lose!'
       outcome
     elsif @dealerhand <= 16
       dealer_hit
     elsif @dealerhand >= 17 && @dealerhand < 21
       outcome
     else
-      puts 'Dealer bust!'
+      puts FONT.write('Dealer bust!')
       @bank += @player_bet * 1.5
       history
     end

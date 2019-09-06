@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 require 'colorize'
-# This class is to create a new card combining the suit and rank to print out to the user in respective colours
+# This class is to create a new card
+# combining the suit and rank
 class Card
   def initialize(rank, suit)
     @rank = rank
@@ -16,7 +17,7 @@ class Card
       elsif @rank == 'A'
         @rank = 11
       end
-       @rank
+      @rank
     else @suit == '♣' || @suit == '♠'
          puts @rank.to_s.colorize(:black).on_white + " #{@suit}".colorize(:black).on_white
          if @rank == 'K' || @rank == 'Q' || @rank == 'J'
@@ -29,9 +30,9 @@ class Card
   end
 end
 
-# this class is to create a 52 card deck by itterating through the ranks array and pairing with each suit
+# this class is to create a 52 card deck
 # It shuffles the deck and pulls a card from the deck
-class Deck 
+class Deck
   def initialize
     @ranks = [*(2..10), 'J', 'Q', 'K', 'A']
     @suits = ['♣', '♥', '♠', '♦']
@@ -45,9 +46,6 @@ class Deck
   end
 
   def deal
-  
     @new_deck.shift.deal_card
-  
   end
 end
-
